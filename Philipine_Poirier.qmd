@@ -100,7 +100,13 @@ kable(age_group)
 
 # Question 9 
 ```{r}
-#? 
+oldest <- students %>%
+  group_by(group) %>%
+  filter(age == max(age)) %>%   # garder seulement le(s) plus âgé(s) du groupe
+  select(id, sex, age, group) %>%
+  arrange(desc(age))
+
+kable(oldest)
 ```
 
 # Question 10
@@ -334,3 +340,15 @@ fail %>%
 ```
 
 # Question 30
+```{r}
+age_success <- pass %>%
+  left_join(students %>%
+              select(id, age), by = "id") %>%
+  group_by(age) %>%
+  summarise(success_rate = mean(pass == TRUE))
+
+age_success %>%
+  ggplot(aes(x = age, y = success_rate)) +
+  geom_col()
+```
+
