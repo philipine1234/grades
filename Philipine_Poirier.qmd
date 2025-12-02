@@ -1,0 +1,14 @@
+---
+title: "Philipine_Poirier"
+format: html
+editor: visual
+---
+```{r}
+library(readr)
+```
+
+
+```{r}
+courses <- read_csv("courses.csv")
+```
+
