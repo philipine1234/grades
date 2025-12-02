@@ -40,7 +40,21 @@ students <- read_csv("students.csv") %>%
   )
 
 class(students$birth_date)
+class(students$sex)
 
 ```
+
+#Question 4
+```{r}
+grades <- read_csv("grades.csv")
+grades <- read_delim("grades.csv",
+  delim = "|",
+na = "_",
+)
+
+```
+
+```
+
 
 
