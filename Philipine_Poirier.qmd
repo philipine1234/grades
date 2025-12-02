@@ -310,4 +310,27 @@ pass %>%
 ```
 
 # Question 28
+```{r}
+pass_rate <- pass %>%
+  group_by(group) %>%
+  summarise(pass_rate = mean(pass == TRUE))
 
+pass_rate %>%
+  ggplot(aes(x = group, y = pass_rate)) +
+  geom_col()
+```
+
+# Question 29
+```{r}
+fail <- avg_course_student %>%
+  filter(avg_grade < 5) %>%
+  group_by(course_id) %>%
+  summarise(nb_fail = n()) %>%       
+  arrange(desc(nb_fail)) 
+
+fail %>%
+  slice_head(n = 1) %>%
+  kable()
+```
+
+# Question 30
