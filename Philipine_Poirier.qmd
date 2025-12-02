@@ -87,5 +87,14 @@ students %>%
   geom_histogram(binwidth = 1)
 ```
 
+# Question 8
+```{r}
+age_group <- students %>%
+  group_by(group) %>%
+  summarise(median_age = median(age))
+
+age_group %>%
+  kable()
+```
 
 
