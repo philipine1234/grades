@@ -168,4 +168,12 @@ herbal_dist %>%
   geom_col()
 ```
 
+# Question 17
+```{r}
+herbal_nb %>%
+  ggplot(aes(x = group, y = nb_grades)) +
+  geom_boxplot()
+```
+
+
 
