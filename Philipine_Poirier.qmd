@@ -109,7 +109,24 @@ The data set contains `r sum(!is.na(grades$grade))` grades.
 ```{r}
 average <- grades %>%
   filter(course_id == 9) %>%
-  
+  #? 
 ```
 
+# Question 12
+```{r}
+
+```
+
+# Question 13
+```{r}
+nb_grades_student <- grades %>%
+  group_by(id) %>%                     
+  summarise(nb_grades = n()) %>%
+  left_join(students %>% select(id, sex), 
+            by = "id") 
+
+nb_grades_student %>%
+  slice_head(n = 5) %>%
+  knitr::kable()
+```
 
