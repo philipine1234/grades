@@ -96,8 +96,20 @@ age_group <- students %>%
 kable(age_group)
 ```
 
-#Question 10
+# Question 9 
+```{r}
+#? 
+```
+
+# Question 10
 The data set contains `r sum(!is.na(grades$grade))` grades.
 
+
+# Question 11
+```{r}
+average <- grades %>%
+  filter(course_id == 9) %>%
+  
+```
 
 
