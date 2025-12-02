@@ -30,4 +30,17 @@ courses %>%
 
 
 # Question 3 
+```{r}
+students <- read_csv("students.csv") %>%
+  mutate(
+    id = as.integer(id),
+    group = factor(group),
+    birth_date = as.Date(birth_date),
+    sex = factor(sex)
+  )
+
+class(students$birth_date)
+
+```
+
 
