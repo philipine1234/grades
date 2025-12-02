@@ -7,7 +7,7 @@ editor: visual
 library(readr)
 library(dplyr)
 library(knitr)
-
+library(ggplot2)
 ```
 
 
@@ -54,7 +54,25 @@ na = "_",
 
 ```
 
+#Question 5
+
+```{r}
+students %>%
+  group_by(group) %>%
+  summarise(n_students = n()) %>%
+  ggplot(aes(x = group, y = n_students)) +
+  geom_col()
 ```
+
+#Question 6 
+
+```{r}
+students %>%
+  ggplot(aes(x = group, fill = sex)) +
+  geom_bar(position = "fill")
+```
+
+
 
 
 
