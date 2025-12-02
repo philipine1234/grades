@@ -13,6 +13,7 @@ library(tidyr)
 
 ```
 
+Here is the link for the [github project](https://github.com/philipine1234/grades.git)
 
 # Question 1 
 ```{r}
@@ -129,7 +130,14 @@ earth_group_avg %>%
 
 # Question 12
 ```{r}
-
+#add semesters to the table
+grades_sem <- grades %>%
+  left_join(courses %>% select(course_id, semester),
+            by = "course_id")
+#not sure if we needed to do it for the earth course only or for the all the courses. 
+grades_sem %>%
+  ggplot(aes(x = factor(semester), y = grade)) +
+  geom_boxplot()
 ```
 
 # Question 13
