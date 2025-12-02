@@ -267,4 +267,10 @@ final %>%
   geom_boxplot()
 ```
 
+# Question 25
+```{r}
+final %>%
+  ggplot(aes(x = group, y = final_grade, fill = sex)) +
+  geom_boxplot()
+```
 
