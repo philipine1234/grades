@@ -3,6 +3,9 @@ title: "Philipine_Poirier"
 author: "Philipine Poirier"
 format: html
 ---
+
+Here is the link for the [github project](https://github.com/philipine1234/grades.git)
+
 ```{r}
 library(readr)
 library(dplyr)
@@ -13,7 +16,7 @@ library(tidyr)
 
 ```
 
-Here is the link for the [github project](https://github.com/philipine1234/grades.git)
+
 
 # Question 1 
 ```{r}
@@ -50,7 +53,6 @@ class(students$sex)
 
 # Question 4
 ```{r}
-grades <- read_csv("grades.csv")
 grades <- read_delim("grades.csv",
   delim = "|",
 na = "_",
