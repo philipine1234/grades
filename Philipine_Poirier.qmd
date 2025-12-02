@@ -92,9 +92,16 @@ students %>%
 age_group <- students %>%
   group_by(group) %>%
   summarise(median_age = median(age))
-
-age_group %>%
-  kable()
+  kable(age_group)
 ```
 
+#Question 9 
+```{r}
+max_age <- students %>%
+  group_by(group) %>%
+  summarise(max_age = max(age))
+
+max_age
+
+```
 
