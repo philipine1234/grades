@@ -92,16 +92,12 @@ students %>%
 age_group <- students %>%
   group_by(group) %>%
   summarise(median_age = median(age))
-  kable(age_group)
+
+kable(age_group)
 ```
 
-#Question 9 
-```{r}
-max_age <- students %>%
-  group_by(group) %>%
-  summarise(max_age = max(age))
+#Question 10
+The data set contains `r sum(!is.na(grades$grade))` grades.
 
-max_age
 
-```
 
