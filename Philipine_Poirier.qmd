@@ -8,6 +8,7 @@ library(readr)
 library(dplyr)
 library(knitr)
 library(ggplot2)
+library(lubridate)
 ```
 
 
@@ -16,7 +17,7 @@ library(ggplot2)
 courses <- read_csv("courses.csv")
 ```
 
-#Question 2 
+# Question 2 
 ```{r}
 courses %>%
   rename(
@@ -44,7 +45,7 @@ class(students$sex)
 
 ```
 
-#Question 4
+# Question 4
 ```{r}
 grades <- read_csv("grades.csv")
 grades <- read_delim("grades.csv",
@@ -54,7 +55,7 @@ na = "_",
 
 ```
 
-#Question 5
+# Question 5
 
 ```{r}
 students %>%
@@ -64,7 +65,7 @@ students %>%
   geom_col()
 ```
 
-#Question 6 
+# Question 6 
 
 ```{r}
 students %>%
@@ -72,7 +73,19 @@ students %>%
   geom_bar(position = "fill")
 ```
 
+# Question 7 
+```{r}
+students <- students %>% 
+  mutate(
+    age = round(time_length(today() - birth_date, unit = "year"))
+  )
+```
 
+```{r}
+students %>%
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 1)
+```
 
 
 
