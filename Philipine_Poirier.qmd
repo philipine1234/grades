@@ -137,3 +137,24 @@ nb_grades_student %>%
   geom_boxplot()
 ```
 
+# Question 15 
+
+```{r}
+herbal <- grades %>%
+  filter(course_id == 2)
+
+
+herbal_nb <- herbal %>%
+  group_by(id) %>%
+  summarise(nb_grades = sum(!is.na(grade)))
+
+herbal_nb <- herbal_nb %>%
+  left_join(students %>% select(id, group, sex),
+            by = "id")
+
+herbal_nb %>%
+  slice_head(n = 5) %>%
+  knitr::kable()
+```
+
+# Question 16 
