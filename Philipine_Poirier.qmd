@@ -239,4 +239,32 @@ student_max_corr %>%
   geom_point()
 ```
 
+# Question 23
+```{r}
+avg_course_student <- grades %>%
+  group_by(id, course_id) %>%
+  summarise(avg_grade = mean(grade, na.rm = TRUE))
+
+final <- avg_course_student %>%
+  group_by(id) %>%
+  summarise(final_grade = mean(avg_grade, na.rm = TRUE))
+
+final <- final %>%
+  left_join(students %>% select(id, group, sex), by = "id")
+
+final <- final %>%
+  arrange(desc(final_grade))
+
+final %>%
+  slice_head(n = 5) %>%
+  knitr::kable()
+```
+
+# Question 24
+```{r}
+final %>%
+  ggplot(aes(x = group, y = final_grade)) +
+  geom_boxplot()
+```
+
 
