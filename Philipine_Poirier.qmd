@@ -158,3 +158,14 @@ herbal_nb %>%
 ```
 
 # Question 16 
+```{r}
+herbal_dist <- herbal_nb %>%
+  group_by(nb_grades) %>%
+  summarise(n_students = n())
+
+herbal_dist %>%
+  ggplot(aes(x = nb_grades, y = n_students)) +
+  geom_col()
+```
+
+
