@@ -225,7 +225,7 @@ correlation <- wide_average %>%
 
 # Question 22
 ```{r}
-max_corr <- cor_groups %>%
+max_corr <- correlation %>%
   filter(abs(correlation) == max(abs(correlation))) %>%
   select(group)
 max_corr<- max_corr$group
@@ -273,4 +273,41 @@ final %>%
   ggplot(aes(x = group, y = final_grade, fill = sex)) +
   geom_boxplot()
 ```
+
+# Question 26
+```{r}
+#add the column for the courses with 2 semesters 
+avg_course_student <- avg_course_student %>%
+  mutate(semester = ifelse(course_id <= 6, 1, 2))
+
+pass <- avg_course_student %>%
+  group_by(id) %>%
+  summarise(
+    min_course = min(avg_grade),
+    sem1 = mean(avg_grade[semester == 1]),
+    sem2 = mean(avg_grade[semester == 2])
+  ) %>%
+  mutate(
+    pass = (min_course >= 5) & (sem1 >= 10) & (sem2 >= 10)
+  )
+
+pass <- pass %>%
+  left_join(final %>% select(id, group, sex, final_grade), by = "id") %>%
+  select(id, group, final_grade, pass)
+
+pass %>%
+  slice_head(n = 5) %>%
+  knitr::kable()
+```
+
+
+# Question 27
+```{r}
+pass %>%
+  filter(pass == FALSE & final_grade >= 10) %>%
+  summarise(n = n()) %>%
+  kable()
+```
+
+# Question 28
 
