@@ -1,7 +1,7 @@
 ---
 title: "Philipine_Poirier"
+author: "Philipine Poirier"
 format: html
-editor: visual
 ---
 ```{r}
 library(readr)
@@ -9,6 +9,8 @@ library(dplyr)
 library(knitr)
 library(ggplot2)
 library(lubridate)
+library(tidyr)
+
 ```
 
 
@@ -105,13 +107,6 @@ kable(age_group)
 The data set contains `r sum(!is.na(grades$grade))` grades.
 
 
-# Question 11
-```{r}
-average <- grades %>%
-  filter(course_id == 9) %>%
-  #? 
-```
-
 # Question 12
 ```{r}
 
@@ -175,5 +170,47 @@ herbal_nb %>%
   geom_boxplot()
 ```
 
+# Question 18
+```{r}
+herbal_nb %>%
+  ggplot(aes(x = group, y = nb_grades, fill = sex)) +
+  geom_boxplot()
+```
+
+# Question 19
+```{r}
+avg_per_course <- grades %>%
+  group_by(id, course_id) %>%
+  summarise(avg_grade = mean(grade, na.rm = TRUE))
+
+avg_per_course <- avg_per_course %>%
+  left_join(students %>% select(id, group), by = "id")
+
+
+avg_per_course <- avg_per_course %>%
+  left_join(courses %>% select(course_id, `course`),
+            by = c("course_id" = "course_id"))
+
+wide_avg <- avg_per_course %>%
+  mutate(avg_grade = round(avg_grade, 2)) %>%   # <-- arrondi ici
+  select(id, group, `course`, avg_grade) %>%
+  pivot_wider(
+    names_from = `course`,
+    values_from = avg_grade
+  )
+
+
+wide_avg %>%
+  select(id, group,
+         `Animal Lore and Totemism`,
+         `Astronomy and Celestial Navigation`) %>%
+  slice_head(n = 5) %>%
+  knitr::kable()
+```
+
+# Question 20 
+```{r}
+
+```
 
 
