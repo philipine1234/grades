@@ -191,7 +191,7 @@ avg_per_course <- avg_per_course %>%
   left_join(courses %>% select(course_id, `course`),
             by = c("course_id" = "course_id"))
 
-wide_avg <- avg_per_course %>%
+wide_average <- avg_per_course %>%
   mutate(avg_grade = round(avg_grade, 2)) %>%   # <-- arrondi ici
   select(id, group, `course`, avg_grade) %>%
   pivot_wider(
@@ -200,7 +200,7 @@ wide_avg <- avg_per_course %>%
   )
 
 
-wide_avg %>%
+wide_average %>%
   select(id, group,
          `Animal Lore and Totemism`,
          `Astronomy and Celestial Navigation`) %>%
@@ -210,7 +210,33 @@ wide_avg %>%
 
 # Question 20 
 ```{r}
+wide_average %>%
+  ggplot(aes(x = `Storytelling and Oral Tradition`,
+             y = `Tribal Law and Customs`)) +
+  geom_point()
+```
+# Question 21
+```{r}
+correlation <- wide_average %>%
+  group_by(group) %>%
+  summarise(correlation = cor(`Hunting and Gathering Skills`,
+                              `Herbalism and Traditional Medicine`))
+```
 
+# Question 22
+```{r}
+max_corr <- cor_groups %>%
+  filter(abs(correlation) == max(abs(correlation))) %>%
+  select(group)
+max_corr<- max_corr$group
+
+student_max_corr <- wide_average %>%
+  filter(group == max_corr)
+
+student_max_corr %>%
+  ggplot(aes(x = `Herbalism and Traditional Medicine`,
+             y = `Hunting and Gathering Skills`)) +
+  geom_point()
 ```
 
 
