@@ -5,10 +5,29 @@ editor: visual
 ---
 ```{r}
 library(readr)
+library(dplyr)
+library(knitr)
+
 ```
 
 
+# Question 1 
 ```{r}
 courses <- read_csv("courses.csv")
 ```
+
+#Question 2 
+```{r}
+courses %>%
+  rename(
+    "identifiant" = course_id,
+    "semester" = semester,
+    "number of exams" = nb_grades
+  ) %>%
+  arrange(`course`) %>%
+  kable()
+```
+
+
+# Question 3 
 
