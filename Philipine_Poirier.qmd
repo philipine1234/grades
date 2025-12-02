@@ -112,6 +112,20 @@ kable(oldest)
 # Question 10
 The data set contains `r sum(!is.na(grades$grade))` grades.
 
+# Question 11 
+```{r}
+earth <- grades %>%
+  filter(course_id == 9) %>%
+  left_join(students %>% select(id, group), by = "id")
+
+earth_group_avg <- earth %>%
+  group_by(group) %>%
+  summarise(avg_grade = mean(grade, na.rm = TRUE))
+
+earth_group_avg %>%
+  ggplot(aes(x = group, y = avg_grade)) +
+  geom_col()
+```
 
 # Question 12
 ```{r}
