@@ -130,3 +130,10 @@ nb_grades_student %>%
   knitr::kable()
 ```
 
+# Question 14
+```{r}
+nb_grades_student %>%
+  ggplot(aes(x = sex, y = nb_grades)) +
+  geom_boxplot()
+```
+
